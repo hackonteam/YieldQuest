@@ -1,0 +1,11 @@
+{
+  "network": "unknown",
+  "chainId": 5003,
+  "timestamp": "2026-01-08T06:18:40.649Z",
+  "deployer": "0xC289b3c8f161006a180fD892348d8895ebF91214",
+  "testUSDC": "0x2D0B0a809212253C1c2894fF2eF2b0794F3B3408",
+  "badgeNFT": "0xF143F06E43c488497254C5cEf628ADD37ea91295",
+  "xpManager": "0x56747dEAEAa001935dEc5706D9b947904049063A",
+  "questVault": "0x9Db8974f6D22EBa82f0fEd4004b58CD8db28D76E",
+  "leaderboardSnapshot": "0x6Facc3CE673376F6cdae1C27f90F30e9f2B620F1"
+}

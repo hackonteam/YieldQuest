@@ -1,0 +1,263 @@
+@import "@fontsource/press-start-2p";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* YieldQuest Design System - Pixel RPG Theme */
+@layer base {
+  :root {
+    /* Core palette - warm fantasy RPG */
+    --background: 30 20% 8%;
+    --foreground: 45 30% 90%;
+
+    --card: 30 25% 12%;
+    --card-foreground: 45 30% 90%;
+
+    --popover: 30 25% 10%;
+    --popover-foreground: 45 30% 90%;
+
+    /* Gold/Amber primary - treasure theme */
+    --primary: 43 90% 55%;
+    --primary-foreground: 30 30% 10%;
+    --primary-glow: 43 100% 65%;
+
+    /* Forest green secondary */
+    --secondary: 140 35% 25%;
+    --secondary-foreground: 140 30% 90%;
+
+    /* Muted earth tones */
+    --muted: 30 15% 18%;
+    --muted-foreground: 30 15% 55%;
+
+    /* Copper/Bronze accent */
+    --accent: 25 70% 45%;
+    --accent-foreground: 45 30% 95%;
+
+    /* Danger - blood red */
+    --destructive: 0 65% 50%;
+    --destructive-foreground: 0 0% 98%;
+
+    /* Success - emerald */
+    --success: 150 60% 40%;
+    --success-foreground: 150 30% 95%;
+
+    /* Borders */
+    --border: 30 20% 22%;
+    --input: 30 20% 18%;
+    --ring: 43 90% 55%;
+
+    --radius: 0.25rem;
+
+    /* RPG-specific tokens */
+    --xp-bar: 280 70% 60%;
+    --xp-glow: 280 80% 70%;
+    --hotspot-glow: 43 100% 60%;
+    --overlay-backdrop: 30 30% 5%;
+    
+    /* Gradients */
+    --gradient-gold: linear-gradient(135deg, hsl(43 90% 55%), hsl(35 85% 45%));
+    --gradient-bronze: linear-gradient(135deg, hsl(25 70% 45%), hsl(20 60% 35%));
+    --gradient-dark: linear-gradient(180deg, hsl(30 25% 12%), hsl(30 20% 8%));
+    
+    /* Shadows */
+    --shadow-glow: 0 0 20px hsl(43 100% 60% / 0.4);
+    --shadow-card: 0 8px 32px hsl(0 0% 0% / 0.5);
+    --shadow-hotspot: 0 0 40px hsl(43 100% 60% / 0.6);
+
+    /* Sidebar - not used but required */
+    --sidebar-background: 30 25% 10%;
+    --sidebar-foreground: 45 30% 90%;
+    --sidebar-primary: 43 90% 55%;
+    --sidebar-primary-foreground: 30 30% 10%;
+    --sidebar-accent: 30 25% 15%;
+    --sidebar-accent-foreground: 45 30% 90%;
+    --sidebar-border: 30 20% 22%;
+    --sidebar-ring: 43 90% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+
+  /* Pixel font for headings */
+  .font-pixel {
+    font-family: "Press Start 2P", monospace;
+  }
+}
+
+@layer components {
+  /* Hotspot styles */
+  .hotspot {
+    @apply absolute cursor-pointer transition-all duration-200;
+    @apply border-2 border-transparent rounded-sm;
+  }
+
+  .hotspot:hover {
+    @apply border-primary/60;
+    box-shadow: var(--shadow-hotspot);
+    background: hsl(var(--primary) / 0.1);
+  }
+
+  .hotspot::after {
+    content: attr(data-label);
+    @apply absolute left-1/2 -translate-x-1/2 -bottom-8;
+    @apply px-3 py-1 rounded text-xs font-pixel;
+    @apply bg-card/95 text-primary border border-primary/40;
+    @apply opacity-0 transition-opacity duration-200 pointer-events-none;
+    @apply whitespace-nowrap;
+  }
+
+  .hotspot:hover::after {
+    @apply opacity-100;
+  }
+
+  /* XP Bar */
+  .xp-bar {
+    @apply h-3 rounded-full overflow-hidden;
+    background: hsl(var(--muted));
+    box-shadow: inset 0 2px 4px hsl(0 0% 0% / 0.4);
+  }
+
+  .xp-bar-fill {
+    @apply h-full rounded-full transition-all duration-500;
+    background: linear-gradient(90deg, hsl(var(--xp-bar)), hsl(var(--xp-glow)));
+    box-shadow: 0 0 12px hsl(var(--xp-glow) / 0.6);
+  }
+
+  /* Modal overlay */
+  .modal-overlay {
+    @apply fixed inset-0 z-50 flex items-center justify-center;
+    background: hsl(var(--overlay-backdrop) / 0.85);
+    backdrop-filter: blur(4px);
+  }
+
+  /* Pixel border effect */
+  .pixel-border {
+    @apply border-4 border-primary/60;
+    box-shadow: 
+      inset 0 0 0 2px hsl(var(--background)),
+      0 0 0 2px hsl(var(--primary) / 0.3),
+      var(--shadow-card);
+  }
+
+  /* Gold text glow */
+  .text-glow {
+    text-shadow: 0 0 20px hsl(var(--primary-glow) / 0.6);
+  }
+
+  /* Pulse animation for active elements */
+  .pulse-glow {
+    animation: pulseGlow 2s ease-in-out infinite;
+  }
+
+  /* Badge styles */
+  .badge-card {
+    @apply relative p-4 rounded border-2 border-primary/30;
+    @apply bg-gradient-to-b from-card to-background;
+    @apply transition-all duration-300 hover:border-primary/60;
+  }
+
+  .badge-card:hover {
+    box-shadow: var(--shadow-glow);
+  }
+
+  /* Quest card */
+  .quest-card {
+    @apply relative p-6 rounded-sm;
+    @apply bg-card border-2 border-border;
+    @apply transition-all duration-300;
+  }
+
+  .quest-card:hover {
+    @apply border-primary/50;
+    box-shadow: var(--shadow-glow);
+  }
+
+  .quest-card.safe {
+    --quest-color: 150 60% 40%;
+    @apply border-l-4;
+    border-left-color: hsl(var(--quest-color));
+  }
+
+  .quest-card.risky {
+    --quest-color: 43 90% 55%;
+    @apply border-l-4;
+    border-left-color: hsl(var(--quest-color));
+  }
+
+  .quest-card.hardcore {
+    --quest-color: 0 65% 50%;
+    @apply border-l-4;
+    border-left-color: hsl(var(--quest-color));
+  }
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out forwards;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.2s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.3s ease-out forwards;
+  }
+
+  .animate-slide-right {
+    animation: slideRight 0.3s ease-out forwards;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideRight {
+  from { opacity: 0; transform: translateX(-100%); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 20px hsl(43 100% 60% / 0.3); }
+  50% { box-shadow: 0 0 40px hsl(43 100% 60% / 0.6); }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary) / 0.5);
+}
